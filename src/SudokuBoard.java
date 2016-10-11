@@ -7,8 +7,12 @@ import java.util.Random;
 public class SudokuBoard {
 	
 	final private int SIZE = 4;
+	// The normal board
 	private int[][] board;
+	// The completed board
 	private int[][] completedBoard;
+	// The stuck numbers
+	private int[][] stuckBoard;
 	
 	public SudokuBoard() {
 		
@@ -26,17 +30,26 @@ public class SudokuBoard {
 		
 		// create correct board
 		completedBoard = new int[SIZE][SIZE];
+		stuckBoard = new int[SIZE][SIZE];
 		
 		for(int i = 0; i < SIZE; i++){
 			for(int j = 0; j < SIZE; j++){
-				completedBoard[i][j] = board[i][j];		
+				completedBoard[i][j] = board[i][j];	
+				stuckBoard[i][j] = 0;
 			}
 		}
 		
 		hideNumbers();
+		
+		for(int i = 0; i < SIZE; i++){
+			for(int j = 0; j < SIZE; j++){
+				if(getValue(i, j) != 0)
+					stuckBoard[i][j] = -1;
+			}
+		}
 	}
 	
-	// Hite board numbers
+	// Hide board numbers
 	public void hideNumbers(){
 		
 		Random rand = new Random();
@@ -50,6 +63,7 @@ public class SudokuBoard {
 			board[number / 4][number % 4] = 0;
 			numberList.remove(index);
 		}
+		
 	}
 	
 	
@@ -166,9 +180,11 @@ public class SudokuBoard {
 			checker = false;
 		else if(value < 1 || value > 4)
 			checker = false;
+		else if(stuckBoard[row][col] == -1)
+			checker = false;
 		
 		if(!checker)
-			System.out.println("Incorrect input");
+			System.out.println("Incorrect input or change to stuck number");
 		
 		return checker;
 	}
