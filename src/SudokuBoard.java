@@ -61,6 +61,16 @@ public class SudokuBoard {
 		System.out.println("  --------------");
 	}
 	
+	public boolean checkVictory() {
+		
+		for(int i = 0; i < SIZE; i++)
+			for(int j = 0; j < SIZE; j++)
+				if(board[i][j] == 0)
+					return false;
+		
+		return true;
+	}
+	
 	private boolean checkArrayBound(int horiPos, int vertPos, int value) {
 		
 		if(horiPos < 0 || horiPos > 3)

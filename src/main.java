@@ -13,20 +13,20 @@ public class main {
 		String actionInput = "";
 		int horiPos, vertPos, value;
 		
-		
-		
 		while(!actionInput.equals("QUIT")){
 			
 			sudoku.printBoard();
 			System.out.println("Enter A to add new value, Enter B to remove value, Enter QUIT to quit the program");
 			actionInput = scan.nextLine();
 			
+			
 			if(actionInput.equals("A") || actionInput.equals("a")) {
 				
 				vertPos = scan.nextInt();
 				horiPos = scan.nextInt();
 				value = scan.nextInt();
-				sudoku.addValue(vertPos, horiPos, value);
+				if(sudoku.addValue(vertPos, horiPos, value))
+					sudoku.checkVictory();
 				
 			} else if(actionInput.equals("B") || actionInput.equals("b")) {
 				
@@ -42,7 +42,6 @@ public class main {
 				
 				System.out.println("Invalid input");
 			}
-			
 			
 		}
 	}
