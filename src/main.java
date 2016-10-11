@@ -1,18 +1,50 @@
+import java.util.Scanner;
+
 
 public class main {
-
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
 		SudokuBoard sudoku = new SudokuBoard();
 		
-		String input = "";
+		Scanner scan = new Scanner(System.in);
 		
-		sudoku.printBoard();
-		//while(!input.equals("QUIT")){
+		String actionInput = "";
+		int horiPos, vertPos, value;
+		
+		
+		
+		while(!actionInput.equals("QUIT")){
 			
-		
-		//}
+			sudoku.printBoard();
+			System.out.println("Enter A to add new value, Enter B to remove value, Enter QUIT to quit the program");
+			actionInput = scan.nextLine();
+			
+			if(actionInput.equals("A") || actionInput.equals("a")) {
+				
+				vertPos = scan.nextInt();
+				horiPos = scan.nextInt();
+				value = scan.nextInt();
+				sudoku.addValue(vertPos, horiPos, value);
+				
+			} else if(actionInput.equals("B") || actionInput.equals("b")) {
+				
+				horiPos = scan.nextInt();
+				vertPos = scan.nextInt();
+			} else if(actionInput.equals("QUIT")) {
+				
+				System.out.println("Thanks for playing");
+				
+			} else {
+				
+				System.out.println("Invalid input");
+			}
+			
+			
+		}
 	}
+	
+	
 
 }

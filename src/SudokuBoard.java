@@ -15,15 +15,20 @@ public class SudokuBoard {
 		
 	}
 	
-	public void setPos(int horiPos, int vertPos, int index) {
+	public void addValue(int vertPos, int horiPos, int value) {
+
+		board[vertPos][horiPos] = value;
+	}
+	
+	public void removeValue(int horiPos, int vertPos) {
 		
-		board[horiPos][vertPos] = index;
+		board[horiPos][vertPos] = 0;
 	}
 
 	public void printBoard() {
 		
 		System.out.println("    1  2  3  4");
-		System.out.println("  -------------");
+		System.out.println("  --------------");
 		
 		for(int i = 0; i < SIZE; i++) {
 			System.out.print(i+1 + " |");
@@ -33,6 +38,6 @@ public class SudokuBoard {
 			System.out.println("|");
 		}
 		
-		System.out.println("  -------------");
+		System.out.println("  --------------");
 	}
 }
