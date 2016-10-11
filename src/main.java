@@ -32,6 +32,8 @@ public class main {
 				
 				horiPos = scan.nextInt();
 				vertPos = scan.nextInt();
+				sudoku.removeValue(horiPos, vertPos);
+				
 			} else if(actionInput.equals("QUIT")) {
 				
 				System.out.println("Thanks for playing");

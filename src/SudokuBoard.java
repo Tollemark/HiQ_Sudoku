@@ -15,14 +15,34 @@ public class SudokuBoard {
 		
 	}
 	
-	public void addValue(int vertPos, int horiPos, int value) {
+	public boolean addValue(int vertPos, int horiPos, int value) {
 
-		board[vertPos][horiPos] = value;
+		vertPos--;
+		horiPos--;
+		if(checkArrayBound(horiPos, vertPos, value)){
+		
+			for(int i = 0; i < SIZE; i++)
+				if(board[vertPos][i] == value)
+					return false;
+			
+			for(int i = 0; i < SIZE; i++)
+				if(board[i][horiPos] == value)
+					return false;
+			
+			
+			board[vertPos][horiPos] = value;
+			
+			return true;
+		}
+		return false;
 	}
 	
 	public void removeValue(int horiPos, int vertPos) {
 		
-		board[horiPos][vertPos] = 0;
+		vertPos--;
+		horiPos--;
+		if(checkArrayBound(horiPos, vertPos, 0))
+			board[horiPos][vertPos] = 0;
 	}
 
 	public void printBoard() {
@@ -39,5 +59,17 @@ public class SudokuBoard {
 		}
 		
 		System.out.println("  --------------");
+	}
+	
+	private boolean checkArrayBound(int horiPos, int vertPos, int value) {
+		
+		if(horiPos < 0 || horiPos > 3)
+			return false;
+		if(vertPos < 0 || vertPos > 3)
+			return false;
+		if(value < 1 || value > 4)
+			return false;
+		
+		return true;
 	}
 }
