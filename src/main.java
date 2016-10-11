@@ -25,8 +25,13 @@ public class main {
 				vertPos = scan.nextInt();
 				horiPos = scan.nextInt();
 				value = scan.nextInt();
+				
 				if(sudoku.addValue(vertPos, horiPos, value))
-					sudoku.checkVictory();
+					if(sudoku.checkVictory()){
+						actionInput = "QUIT";
+						sudoku.printBoard();
+						System.out.println("Victory!");
+					}
 				
 			} else if(actionInput.equals("B") || actionInput.equals("b")) {
 				
@@ -42,8 +47,10 @@ public class main {
 				
 				System.out.println("Invalid input");
 			}
-			
+			scan.nextLine();
 		}
+		
+		
 	}
 	
 	
