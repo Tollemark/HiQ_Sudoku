@@ -19,7 +19,7 @@ public class main {
 			System.out.println("Enter A to add new value, Enter B to remove value, Enter QUIT to quit the program");
 			actionInput = scan.nextLine();
 			
-			
+			// Adding new value to board
 			if(actionInput.equals("A") || actionInput.equals("a")) {
 				
 				System.out.println("Enter row:");
@@ -36,6 +36,7 @@ public class main {
 						System.out.println("Victory!");
 					}
 				
+			// Removing value from board
 			} else if(actionInput.equals("B") || actionInput.equals("b")) {
 				
 				System.out.println("Enter row:");
@@ -44,10 +45,12 @@ public class main {
 				col = scan.nextInt();
 				sudoku.removeValue(row, col);
 				
+			// Exit program
 			} else if(actionInput.equals("QUIT")) {
 				
 				System.out.println("Thanks for playing");
 				
+			// Invalid input
 			} else {
 				
 				System.out.println("Invalid input");

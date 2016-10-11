@@ -16,16 +16,15 @@ public class SudokuBoard {
 		
 		// Init board
 		for(int i = 0; i < SIZE; i++){
-			
 			for(int j = 0; j < SIZE; j++){
-				
-				board[i][j] = 0;
+				setValue(i ,j ,0);
 				
 			}
 		}
 		
 		generateBoard();
 		
+		// create correct board
 		completedBoard = new int[SIZE][SIZE];
 		
 		for(int i = 0; i < SIZE; i++){
@@ -34,9 +33,10 @@ public class SudokuBoard {
 			}
 		}
 		
-		hideNumbers();;
+		hideNumbers();
 	}
 	
+	// Hite board numbers
 	public void hideNumbers(){
 		
 		Random rand = new Random();
@@ -65,10 +65,13 @@ public class SudokuBoard {
 	}
 	
 	
+	// Generating random board
 	public void generateBoard() {
 		
 		Random rand = new Random();
 		int row, col;
+		
+		// value
 		for(int i = 1; i <= 4; i++){
 			
 			do{
@@ -76,15 +79,19 @@ public class SudokuBoard {
 				col = rand.nextInt(2);
 			} while(getValue(row, col) != 0);
 			
+			// set value for cell 1
 			setValue(row, col, i);
 			
+			// set value for cell 2
 			row ^= 1;
 			col ^= 1;
 			setValue(row, col + 2, i);
 			
+			// set value for cell 3
 			row ^= 1;
 			setValue(row + 2, col, i);
 			
+			// set value for cell 4
 			row ^= 1;
 			col ^= 1;
 			setValue(row + 2, col + 2, i);
@@ -99,11 +106,11 @@ public class SudokuBoard {
 		if(checkArrayBound(row, col, value)){
 		
 			for(int i = 0; i < SIZE; i++)
-				if(board[row][i] == value)
+				if(getValue(row, i) == value)
 					return false;
 			
 			for(int i = 0; i < SIZE; i++)
-				if(board[i][col] == value)
+				if(getValue(i, col) == value)
 					return false;
 			
 			
@@ -120,7 +127,7 @@ public class SudokuBoard {
 		row--;
 		col--;
 		if(checkArrayBound(row, col, 1))
-			board[row][col] = 0;
+			setValue(row, col, 0);
 	}
 
 	
@@ -149,15 +156,20 @@ public class SudokuBoard {
 	}
 	
 	
+	// Checking boundary
 	private boolean checkArrayBound(int row, int col, int value) {
 		
+		boolean checker = true;
 		if(row < 0 || row > 3)
-			return false;
-		if(col < 0 || col > 3)
-			return false;
-		if(value < 1 || value > 4)
-			return false;
+			checker = false;
+		else if(col < 0 || col > 3)
+			checker = false;
+		else if(value < 1 || value > 4)
+			checker = false;
 		
-		return true;
+		if(!checker)
+			System.out.println("Incorrect input");
+		
+		return checker;
 	}
 }
