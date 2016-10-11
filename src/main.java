@@ -11,7 +11,7 @@ public class main {
 		Scanner scan = new Scanner(System.in);
 		
 		String actionInput = "";
-		int horiPos, vertPos, value;
+		int row, col, value;
 		
 		while(!actionInput.equals("QUIT")){
 			
@@ -22,11 +22,14 @@ public class main {
 			
 			if(actionInput.equals("A") || actionInput.equals("a")) {
 				
-				vertPos = scan.nextInt();
-				horiPos = scan.nextInt();
+				System.out.println("Enter row:");
+				row = scan.nextInt();
+				System.out.println("Enter column:");
+				col = scan.nextInt();
+				System.out.println("Enter value:");
 				value = scan.nextInt();
 				
-				if(sudoku.addValue(vertPos, horiPos, value))
+				if(sudoku.addValue(row, col, value))
 					if(sudoku.checkVictory()){
 						actionInput = "QUIT";
 						sudoku.printBoard();
@@ -35,9 +38,11 @@ public class main {
 				
 			} else if(actionInput.equals("B") || actionInput.equals("b")) {
 				
-				horiPos = scan.nextInt();
-				vertPos = scan.nextInt();
-				sudoku.removeValue(horiPos, vertPos);
+				System.out.println("Enter row:");
+				row = scan.nextInt();
+				System.out.println("Enter column:");
+				col = scan.nextInt();
+				sudoku.removeValue(row, col);
 				
 			} else if(actionInput.equals("QUIT")) {
 				
@@ -48,11 +53,6 @@ public class main {
 				System.out.println("Invalid input");
 			}
 			scan.nextLine();
-		}
-		
-		
+		}	
 	}
-	
-	
-
 }

@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
 
@@ -14,7 +15,6 @@ public class SudokuBoard {
 		board = new int[SIZE][SIZE];
 		
 		// Init board
-		
 		for(int i = 0; i < SIZE; i++){
 			
 			for(int j = 0; j < SIZE; j++){
@@ -26,10 +26,15 @@ public class SudokuBoard {
 		
 		generateBoard();
 		
-		completedBoard = board;
+		completedBoard = new int[SIZE][SIZE];
 		
-		hideNumbers();
+		for(int i = 0; i < SIZE; i++){
+			for(int j = 0; j < SIZE; j++){
+				completedBoard[i][j] = board[i][j];		
+			}
+		}
 		
+		hideNumbers();;
 	}
 	
 	public void hideNumbers(){
@@ -47,16 +52,21 @@ public class SudokuBoard {
 		}
 	}
 	
+	
 	public int getValue(int row, int col) {
 		
 		return board[row][col];
 	}
 	
-	public void setValue(int row, int col, int value){
+	
+	public void setValue(int row, int col, int value) {
+		
 		board[row][col] = value;
 	}
 	
-	public void generateBoard(){
+	
+	public void generateBoard() {
+		
 		Random rand = new Random();
 		int row, col;
 		for(int i = 1; i <= 4; i++){
@@ -79,9 +89,8 @@ public class SudokuBoard {
 			col ^= 1;
 			setValue(row + 2, col + 2, i);
 		}
-		
-		
 	}
+	
 	
 	public boolean addValue(int row, int col, int value) {
 
@@ -134,12 +143,9 @@ public class SudokuBoard {
 	
 	public boolean checkVictory() {
 		
-		for(int i = 0; i < SIZE; i++)
-			for(int j = 0; j < SIZE; j++)
-				if(board[i][j] == 0)
-					return false;
-		
-		return true;
+		if(Arrays.deepEquals(board, completedBoard))
+			return true;
+		return false;
 	}
 	
 	
